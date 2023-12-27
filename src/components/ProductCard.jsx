@@ -31,7 +31,7 @@ const ProductCard = ({ item }) => {
 			<div>
 				<img
 					src={item.productImage}
-					className='w-[80px] h-[80px] rounded-[8px]'
+					className='w-[90px] h-[90px] rounded-[8px]'
 					alt='foodImg'
 				/>
 			</div>
