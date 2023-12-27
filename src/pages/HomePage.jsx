@@ -21,21 +21,49 @@ import fullSmileEmoji from '../assets/emoji_grinning_face.svg';
 import grinEmoji from '../assets/emoji_slightly_smiling_face.svg';
 import sadEmoji from '../assets/emoji_persevering_face.svg';
 import cryEmoji from '../assets/emoji_weary_face.svg';
-import { data } from '../app/utils/data';
+
 import Hero from '../components/Hero';
-import ProductCard from '../components/ProductCard';
-import { useDispatch } from 'react-redux';
-import { getProducts } from '../app/features/products/ProductSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	getCategories,
+	getProducts,
+} from '../app/features/products/ProductSlice';
 import { resetLogin } from '../app/features/auth/AuthSlice';
+import ProductFilter from '../components/ProductFilter';
+import { productSelector } from '../app/utils/selectors/selectors';
 
 const HomePage = () => {
 	const dispatch = useDispatch();
-	// const selector = useSelector(authSelector);
+	const prodSelector = useSelector(productSelector);
+	const [foodcategory, setfoodcategory] = React.useState('');
+	const [data, setdata] = React.useState('');
 	useEffect(() => {
-		dispatch(getProducts());
+		dispatch(getCategories());
 		dispatch(resetLogin());
+		dispatch(getProducts());
 		// eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {
+		if (prodSelector.products.length !== 0) {
+			setdata([...prodSelector.products]);
+		}
+		// eslint-disable-next-line
+	}, [prodSelector.products]);
+
+	const handleChange = (event) => {
+		const newData = [];
+		setfoodcategory(event.target.value);
+		if (foodcategory !== '' && prodSelector.products.length > 0) {
+			[...prodSelector.products].map((item, index) => {
+				if (item.category.name !== foodcategory) {
+					newData.push(item);
+				}
+				return newData;
+			});
+			setdata(newData);
+		}
+	};
 
 	return (
 		<div>
@@ -181,30 +209,31 @@ const HomePage = () => {
 						</div>
 					</div>
 				</div>
-				<div className='mt-[2rem] border-2 border-[red]'>
-					<h3 className=' font-bold  text-[1.5rem] mb-4'>Most popular</h3>
-					<div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
-						{data.map((item, ind) => (
-							<ProductCard key={ind} item={item} />
-						))}
-					</div>
+				<div className='my-[1rem]'>
+					<label htmlFor='category'>Filter: </label>
+					<select
+						name='category'
+						id='category'
+						value={foodcategory}
+						onChange={handleChange}>
+						{prodSelector.categories.length !== 0 ? (
+							prodSelector.categories.map((item, ind) => (
+								<option value={item.name} key={ind}>
+									{item.name}
+								</option>
+							))
+						) : (
+							<option value={'loading'}>loading</option>
+						)}
+					</select>
 				</div>
-				<div className='mt-[2rem] border-2 border-[red]'>
-					<h3 className=' font-bold  text-[1.5rem] mb-4'>Most popular</h3>
-					<div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
-						{data.map((item, ind) => (
-							<ProductCard key={ind} item={item} />
-						))}
-					</div>
-				</div>
-				<div className='mt-[2rem] border-2 border-[red]'>
-					<h3 className=' font-bold  text-[1.5rem] mb-4'>Most popular</h3>
-					<div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
-						{data.map((item, ind) => (
-							<ProductCard key={ind} item={item} />
-						))}
-					</div>
-				</div>
+				{data.length === 0 ? (
+					<h1 className='text-center font-bold text-[1.5rem]'>
+						Kitchen closed for the day
+					</h1>
+				) : (
+					<ProductFilter data={data} />
+				)}
 			</div>
 		</div>
 	);

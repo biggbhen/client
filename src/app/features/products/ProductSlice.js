@@ -7,6 +7,7 @@ const initialState = {
 	loading: 'idle',
 	error: null,
 	products: [],
+	categories: [],
 };
 
 // get all products
@@ -32,7 +33,39 @@ export const getProducts = createAsyncThunk(
 				response.status === 'success'
 			) {
 				// store the user
-				console.log(response.data);
+
+				return response.data;
+			}
+			return rejectWithValue(response);
+		} catch (error) {
+			toast.error(error.response.data.msg);
+			return rejectWithValue(error);
+		}
+	}
+);
+// get all categories
+export const getCategories = createAsyncThunk(
+	'get/category',
+	async (payload, { rejectWithValue }) => {
+		const token = localStorage.getItem('accessToken');
+
+		setAuthToken(token);
+		try {
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+			const response = await axios.get(
+				`http://localhost:5000/api/category`,
+				config
+			);
+
+			if (
+				response.status === 200 ||
+				response.status === 201 ||
+				response.status === 'success'
+			) {
 				return response.data;
 			}
 			return rejectWithValue(response);
@@ -59,7 +92,19 @@ const productSlice = createSlice({
 			})
 			.addCase(getProducts.fulfilled, (state, action) => {
 				state.loading = 'success';
-				console.log(action.payload);
+				state.products = action.payload;
+				// state.admin = action.payload;
+			})
+			.addCase(getCategories.pending, (state) => {
+				state.loading = 'pending';
+			})
+			.addCase(getCategories.rejected, (state, action) => {
+				state.loading = 'failed';
+				state.error = action.payload.response.data.msg;
+			})
+			.addCase(getCategories.fulfilled, (state, action) => {
+				state.loading = 'success';
+				state.categories = [...action.payload];
 				// state.admin = action.payload;
 			});
 	},
