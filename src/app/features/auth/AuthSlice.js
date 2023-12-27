@@ -104,7 +104,7 @@ const authSlice = createSlice({
 			.addCase(createAccount.rejected, (state, action) => {
 				state.loading = 'failed';
 				console.log(action.payload);
-				state.error = action.payload.response.data.msg;
+				state.error = action?.payload?.response?.data?.msg;
 			})
 			.addCase(createAccount.fulfilled, (state, action) => {
 				state.loading = 'success';
@@ -116,7 +116,7 @@ const authSlice = createSlice({
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.loading = 'failed';
-				state.error = action.payload.response.data.msg;
+				state.error = action?.payload?.response?.data?.msg;
 			})
 			.addCase(login.fulfilled, (state, action) => {
 				state.loading = 'success';

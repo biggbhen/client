@@ -46,7 +46,7 @@ const HomePage = () => {
 
 	useEffect(() => {
 		if (prodSelector.products.length !== 0) {
-			setdata([...prodSelector.products]);
+			setdata([...prodSelector?.products]);
 		}
 		// eslint-disable-next-line
 	}, [prodSelector.products]);
@@ -54,8 +54,8 @@ const HomePage = () => {
 	const handleChange = (event) => {
 		const newData = [];
 		setfoodcategory(event.target.value);
-		if (foodcategory !== '' && prodSelector.products.length > 0) {
-			[...prodSelector.products].map((item, index) => {
+		if (foodcategory !== '' && prodSelector?.products.length > 0) {
+			[...prodSelector?.products].map((item, index) => {
 				if (item.category.name !== foodcategory) {
 					newData.push(item);
 				}
@@ -216,8 +216,8 @@ const HomePage = () => {
 						id='category'
 						value={foodcategory}
 						onChange={handleChange}>
-						{prodSelector.categories.length !== 0 ? (
-							prodSelector.categories.map((item, ind) => (
+						{prodSelector?.categories?.length !== 0 ? (
+							prodSelector?.categories?.map((item, ind) => (
 								<option value={item.name} key={ind}>
 									{item.name}
 								</option>
