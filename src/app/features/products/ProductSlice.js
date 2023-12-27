@@ -10,6 +10,21 @@ const initialState = {
 	categories: [],
 };
 
+export const getBaseUrls = () => {
+	if (
+		window.location.hostname.includes('localhost') ||
+		window.location.hostname.includes('dev')
+	) {
+		return {
+			dev: 'http://localhost:5000',
+		};
+	} else {
+		return {
+			dev: 'https://worrisome-red-viper.cyclic.app',
+		};
+	}
+};
+
 // get all products
 export const getProducts = createAsyncThunk(
 	'get/products',
@@ -23,7 +38,7 @@ export const getProducts = createAsyncThunk(
 				},
 			};
 			const response = await axios.get(
-				`http://localhost:5000/api/products`,
+				`${getBaseUrls().dev}/api/products`,
 				config
 			);
 
@@ -43,6 +58,7 @@ export const getProducts = createAsyncThunk(
 		}
 	}
 );
+
 // get all categories
 export const getCategories = createAsyncThunk(
 	'get/category',
@@ -57,7 +73,7 @@ export const getCategories = createAsyncThunk(
 				},
 			};
 			const response = await axios.get(
-				`http://localhost:5000/api/category`,
+				`${getBaseUrls().dev}/api/category`,
 				config
 			);
 
