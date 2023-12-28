@@ -8,7 +8,7 @@ const ProductCard = ({ item }) => {
 			key={item._id}
 			className=' border-[.5px] border-[#D9DCE2] flex justify-between p-[1rem]  items-center rounded-[.4rem] hover:shadow-lg '>
 			<div className=' w-[12.5rem]'>
-				<h4 className=' font-bold '>{item.title}</h4>
+				<h4 className=' font-bold '>{item.name}</h4>
 				<p className='text-[0.87rem] text-[#858D9D]'>{item.description}</p>
 				<div className=' flex items-center justify-between w-[10rem] '>
 					<img src={thumbsUp} alt='thumbsUp' />
