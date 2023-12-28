@@ -56,6 +56,7 @@ const HomePage = () => {
 		setfoodcategory(selectedCategory);
 	};
 
+	// filter functionality frontend
 	React.useEffect(() => {
 		if (foodcategory !== '' && prodSelector?.products.length > 0) {
 			const newData = [];
