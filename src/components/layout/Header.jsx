@@ -16,7 +16,7 @@ const Header = () => {
 					alt='logo'
 					className='h-[2.5rem] w-[5rem] pr-[1.5rem]'
 				/>
-				<div className='pr-[1.5rem] hidden 	lg_lg:block'>
+				<div className='pr-[1.5rem] hidden 	md_lg:block'>
 					<div className='border-2 border-[#D9DCE2] h-[2.75rem] w-[15rem] flex items-center justify-between rounded-[.3rem] px-2 '>
 						<img src={locationIcon} alt='' />
 						<p className='ml-[-3rem] text-[#667085] text-[.8rem]'>
@@ -30,7 +30,7 @@ const Header = () => {
 					<input
 						type='text'
 						placeholder='Search the place..'
-						className='border-2 border-[#D9DCE2] h-[2.75rem] w-[18rem] flex items-center rounded-[.3rem] pl-8 text-[.8rem]'
+						className='border-2 border-[#D9DCE2] h-[2.75rem] w-[18rem] items-center rounded-[.3rem] pl-8 text-[.8rem] hidden sm:flex'
 					/>
 					<img
 						src={searchIcon}
@@ -40,18 +40,18 @@ const Header = () => {
 				</div>
 			</div>
 
-			<div className='flex items-center justify-between px-2 rounded-[3rem] h-[1.6rem] w-[6.5rem] bg-[#6741FF] '>
+			<div className='flex items-center justify-between py-[10px] px-[7px] rounded-[3rem] h-[1.6rem] w-max bg-[#6741FF] '>
 				<img
 					src={shopingCartIcon}
 					alt='shopingCartIcon'
 					className='h-[1rem] w-[1rem]'
 				/>
-				<span className='text-[.8rem] text-white'> 0 basket </span>
+				{/* <span className='text-[.8rem] text-white'> 0 basket </span>
 				<img
 					src={dropDownIcon}
 					alt='dropDownIcon'
 					className='h-[.5rem] w-[.5rem]'
-				/>
+				/> */}
 			</div>
 		</div>
 	);

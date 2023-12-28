@@ -6,7 +6,7 @@ import appStoreLogo from '../../assets/app-store-logo.svg';
 const Footer = () => {
 	return (
 		<div className='mt-10 bg-[#F9F9F9] py-[2rem]'>
-			<div className='flex items-center justify-between px-[3rem] border-b-[1px] border-[#D9DCE2] py-2 pb-6'>
+			<div className='flex items-center justify-around px-[3rem] border-b-[1px] border-[#D9DCE2] py-2 pb-6 gap-x-[1rem]'>
 				<img src={logo} alt='' className='h-[4.4581rem] w-[6.687rem]' />
 				<div className=''>
 					<h4 className='font-semibold text-[#2B2F38] mb-2'>SWOOPPI</h4>
@@ -32,7 +32,7 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<div className='py-[1rem] flex justify-between items-center w-full px-[3rem] border-b-[1px] border-[#D9DCE2]'>
+			<div className='py-[1rem] flex flex-col sm:flex-row justify-between items-center w-full px-[3rem] border-b-[1px] border-[#D9DCE2] gap-y-[20px] gap-x-[16px]'>
 				<div className='flex justify-between items-center w-[20rem]'>
 					<p className='text-[.875rem] text-[#48505E]'>Privacy policy</p>
 					<p className='text-[.875rem] text-[#48505E]'>Terms of use</p>
