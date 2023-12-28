@@ -14,7 +14,7 @@ const Header = () => {
 				<img
 					src={logo}
 					alt='logo'
-					className='h-[2.5rem] w-[3.75rem] pr-[1.5rem]'
+					className='h-[2.5rem] w-[5rem] pr-[1.5rem]'
 				/>
 				<div className='pr-[1.5rem] hidden 	lg_lg:block'>
 					<div className='border-2 border-[#D9DCE2] h-[2.75rem] w-[15rem] flex items-center justify-between rounded-[.3rem] px-2 '>

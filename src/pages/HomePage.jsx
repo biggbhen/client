@@ -51,19 +51,24 @@ const HomePage = () => {
 		// eslint-disable-next-line
 	}, [prodSelector.products]);
 
-	const handleChange = (event) => {
-		const newData = [];
-		setfoodcategory(event.target.value);
+	const handleChange = (e) => {
+		const selectedCategory = e.target.value;
+		setfoodcategory(selectedCategory);
+	};
+
+	React.useEffect(() => {
 		if (foodcategory !== '' && prodSelector?.products.length > 0) {
+			const newData = [];
 			[...prodSelector?.products].map((item, index) => {
-				if (item.category.name !== foodcategory) {
+				if (item.category.name === foodcategory) {
 					newData.push(item);
 				}
 				return newData;
 			});
 			setdata(newData);
 		}
-	};
+		// eslint-disable-next-line
+	}, [foodcategory]);
 
 	return (
 		<div>
@@ -215,7 +220,8 @@ const HomePage = () => {
 						name='category'
 						id='category'
 						value={foodcategory}
-						onChange={handleChange}>
+						onChange={(e) => handleChange(e)}>
+						<option value=''>Select a category</option>
 						{prodSelector?.categories?.length !== 0 ? (
 							prodSelector?.categories?.map((item, ind) => (
 								<option value={item.name} key={ind}>
