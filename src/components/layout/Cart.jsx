@@ -63,31 +63,36 @@ const Cart = ({ toggleDrawer, open }) => {
 					</p>
 				)}
 			</Box>
-			<Box className='my-[1rem] flex flex-col gap-y-[1rem]'>
-				<p className='px-[20px] flex justify-between'>
-					<span>Subtotal</span>
-					<span>{`N${price}`}</span>
-				</p>
-				<p className='px-[20px] flex justify-between'>
-					<span>Tax</span>
-					<span>{`N${50}`}</span>
-				</p>
-				<p className='px-[20px] flex justify-between'>
-					<span>Delivery</span>
-					<span>{`N${300}`}</span>
-				</p>
-				<p className='px-[20px] flex justify-between'>
-					<span>Total</span>
-					<span>{`N${price + 350}`}</span>
-				</p>
-			</Box>
-			<Button
-				variant='outlined'
-				disableElevation
-				className='w-full my-[1rem]'
-				onClick={() => toast.info('coming soon')}>
-				Checkout
-			</Button>
+			{/* new feature */}
+			{/* {price > 0 && (
+				<>
+					<Box className='my-[1rem] flex flex-col gap-y-[1rem]'>
+						<p className='px-[20px] flex justify-between'>
+							<span>Subtotal</span>
+							<span>{`N${price}`}</span>
+						</p>
+						<p className='px-[20px] flex justify-between'>
+							<span>Tax</span>
+							<span>{`N${50}`}</span>
+						</p>
+						<p className='px-[20px] flex justify-between'>
+							<span>Delivery</span>
+							<span>{`N${300}`}</span>
+						</p>
+						<p className='px-[20px] flex justify-between'>
+							<span>Total</span>
+							<span>{`N${price + 350}`}</span>
+						</p>
+					</Box>
+					<Button
+						variant='outlined'
+						disableElevation
+						className='w-full my-[1rem]'
+						onClick={() => toast.info('coming soon')}>
+						Checkout
+					</Button>
+				</>
+			)} */}
 		</Box>
 	);
 };
