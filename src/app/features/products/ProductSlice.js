@@ -8,6 +8,7 @@ const initialState = {
 	error: null,
 	products: [],
 	categories: [],
+	cartItems: [],
 };
 
 export const getBaseUrls = () => {
@@ -95,10 +96,20 @@ export const getCategories = createAsyncThunk(
 const productSlice = createSlice({
 	name: 'product',
 	initialState,
-	reducers: {},
+	reducers: {
+		addTocart: (state, action) => {
+			const isInCart = [...state.cartItems].some(
+				(cartItem) => cartItem._id === action.payload._id
+			);
+			if (!isInCart) {
+				state.cartItems = [...state.cartItems, action.payload];
+			} else {
+				toast.warning('Item is already in the cart');
+			}
+		},
+	},
 	extraReducers: (builder) => {
 		builder
-
 			.addCase(getProducts.pending, (state) => {
 				state.loading = 'pending';
 			})
@@ -127,3 +138,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
+export const { addTocart } = productSlice.actions;

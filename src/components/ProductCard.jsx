@@ -1,8 +1,12 @@
 import React from 'react';
 import thumbsUp from '../assets/thumbs-up.svg';
 import add from '../assets/add_food.svg';
+import { useDispatch } from 'react-redux';
+import { addTocart } from '../app/features/products/ProductSlice';
 
 const ProductCard = ({ item }) => {
+	const dispatch = useDispatch();
+
 	return (
 		<div
 			key={item._id}
@@ -36,8 +40,9 @@ const ProductCard = ({ item }) => {
 				/>
 				<img
 					src={add}
-					className='w-[30px] h-[30px] absolute translate-x-[50%] right-[50%] bottom-[-15px] cursor-pointer'
-					alt='foodImg'
+					className='w-[30px] h-[30px] absolute translate-x-[50%] right-[50%] bottom-[-15px] cursor-pointer '
+					alt='add to cart'
+					onClick={() => dispatch(addTocart(item))}
 				/>
 			</div>
 		</div>
