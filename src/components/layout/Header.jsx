@@ -8,7 +8,7 @@ import shopingCartIcon from '../../assets/shopping-cart-icon.svg';
 import { useSelector } from 'react-redux';
 import { productSelector } from '../../app/utils/selectors/selectors';
 
-const Header = () => {
+const Header = ({ toggleDrawer }) => {
 	const prodSelector = useSelector(productSelector);
 	const [isScrolled, setIsScrolled] = React.useState(false);
 	const [prevScrollPos, setPrevScrollPos] = React.useState(0);
@@ -35,6 +35,11 @@ const Header = () => {
 
 	const items =
 		prodSelector?.cartItems?.length > 0 ? prodSelector?.cartItems?.length : 0;
+
+	const handleClick = () => {
+		toggleDrawer();
+	};
+
 	return (
 		<div
 			className={`flex items-center justify-between py-[1rem] px-[3rem] min-h-[100px] fixed top-0 left-0 right-0 z-10 bg-white shadow-md ${
@@ -71,7 +76,9 @@ const Header = () => {
 				</div>
 			</div>
 
-			<div className='hidden xs:flex relative items-center justify-between py-[15px] px-[7px] rounded-[25px] h-[1.6rem] w-max bg-[#6741FF]'>
+			<div
+				className='hidden xs:flex relative items-center justify-between py-[15px] px-[7px] rounded-[25px] h-[1.6rem] w-max bg-[#6741FF] cursor-pointer'
+				onClick={handleClick}>
 				<img
 					src={shopingCartIcon}
 					alt='shopingCartIcon'

@@ -103,9 +103,19 @@ const productSlice = createSlice({
 			);
 			if (!isInCart) {
 				state.cartItems = [...state.cartItems, action.payload];
+				toast.success('added to cart');
 			} else {
 				toast.warning('Item is already in the cart');
 			}
+		},
+		removeFromCart: (state, action) => {
+			const newArr = [];
+			[...state.cartItems].filter((item) => {
+				if (item._id !== action.payload._id) {
+					newArr.push(item);
+				}
+			});
+			state.cartItems = newArr;
 		},
 	},
 	extraReducers: (builder) => {
@@ -138,4 +148,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { addTocart } = productSlice.actions;
+export const { addTocart, removeFromCart } = productSlice.actions;
